@@ -3,6 +3,7 @@ let numOfDrumButtons = document.querySelectorAll(".drum").length;
 for (let i = 0; i < numOfDrumButtons; i++) {
   document.querySelectorAll("button")[i].addEventListener("click", function () {
     let buttonHtml = this.innerHTML;
+    buttonAnimation(buttonHtml);
     makeSound(buttonHtml);
   });
 }
@@ -12,6 +13,7 @@ for (let i = 0; i < numOfDrumButtons; i++) {
 
 document.addEventListener("keydown", function (event) {
   makeSound(event.key);
+  buttonAnimation(event.key);
 });
 
 function makeSound(key) {
@@ -48,4 +50,12 @@ function makeSound(key) {
     default:
       console.log("No valid key pressed");
   }
+}
+
+function buttonAnimation(currentKey) {
+  let key = document.querySelector("." + currentKey);
+  key.classList.add("pressed");
+  setTimeout(function () {
+    key.classList.remove("pressed");
+  }, 100);
 }
